@@ -1,32 +1,20 @@
 name: CI
 
-on:
-  push:
-    branches:
-      - main
+on: [ push ]
 
 jobs:
   pre-commit:
+    name:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout código
-        uses: actions/checkout@v2
-
-      - name: Cache do Pre-commit
-        uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
         with:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
-
-      - name: Instalar Poetry, pre-commit e dependências
-        run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-          pip install pre-commit
-          poetry install
-
-      - name: Executar pre-commit
+      - name: Install pre-commit
+        run: pip install pre-commit
+      - name: Run pre-commit
         run: pre-commit run -a --show-diff-on-failure
-
       - name: Executar testes com Poetry
         run: poetry run python -m unittest discover tests
