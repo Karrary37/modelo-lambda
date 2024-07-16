@@ -6,11 +6,11 @@ on:
       - main 
   pull_request:
     branches:
-      - main  
+      - main 
 
 jobs:
   test:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest  
 
     steps:
       - name: Checkout código
@@ -21,10 +21,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install dependencies and pre-commit
         run: |
           python -m pip install --upgrade pip
           pip install poetry
+          pip install pre-commit
           poetry install  # ou `pip install -r requirements.txt` se não estiver usando Poetry
 
       - name: Run pre-commit and tests
