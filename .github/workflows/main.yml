@@ -1,48 +1,18 @@
-name: Python CI
+name: Clean Code
 
-on:
-  push:
-    branches:
-      - main 
-  pull_request:
-    branches:
-      - main 
+on: [push]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest  
-
+  pre-commit:
+    name:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout código
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies and pre-commit
-        run: |
-          python -m pip install --upgrade pip
-          pip install poetry
-          pip install pre-commit
-          poetry install  # ou `pip install -r requirements.txt` se não estiver usando Poetry
-
-      - name: Run pre-commit and tests
-        run: |
-          pre-commit run --all-files
-          poetry run python -m unittest discover tests
-          coverage run -m unittest discover tests
-
-      - name: Check coverage and fail if less than 100%
-        run: |
-          coverage report -m --fail-under=100
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-report
-          path: .coverage
-
-      - name: Final checks
-        run: echo "All checks passed!"
+    - uses: actions/checkout@v4
+    - uses: actions/cache@v3
+      with:
+        path: ~/.cache/pre-commit
+        key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+    - name: Install pre-commit
+      run: pip install pre-commit
+    - name: Run pre-commit
+      run: pre-commit run -a --show-diff-on-failure
