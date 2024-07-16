@@ -1,0 +1,31 @@
+service: modelo-lambda
+
+
+provider:
+  name: aws
+  runtime: python3.11
+  lambdaHashingVersion: 20201221
+
+functions:
+  hello:
+    handler: handler.hello
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    usePoetry: true
+    slim: true
+    strip: true
+    noDeploy:
+      - pytest
+      - boto3
+
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!venv/**'
+    - '!apienv/**'
+    - '!__pycache__/**'
+
+plugins:
+  - serverless-python-requirements
