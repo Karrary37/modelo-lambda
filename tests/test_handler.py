@@ -19,7 +19,7 @@ class TestHelloFunction(unittest.TestCase):
         context = {}
         response = hello(event, context)
 
-        self.assertEqual(response["statusCode"], 200)
+        self.assertEqual(response["statusCode"], 100)
         body = json.loads(response["body"])
         self.assertEqual(body["message"], "Hello, World!")
         self.assertEqual(body["input"], event)
