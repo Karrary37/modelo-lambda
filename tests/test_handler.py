@@ -4,7 +4,6 @@ from handler import hello
 
 
 class TestHelloFunction(unittest.TestCase):
-
     def test_hello(self):
         event = {}
         context = {}
@@ -24,4 +23,3 @@ class TestHelloFunction(unittest.TestCase):
         body = json.loads(response["body"])
         self.assertEqual(body["message"], "Hello, World!")
         self.assertEqual(body["input"], event)
-
