@@ -25,11 +25,9 @@ jobs:
       - name: Executar pre-commit
         run: pre-commit run -a --show-diff-on-failure
 
-      - name: Executar testes com unittest
-        run: python -m unittest discover tests
-
       - name: Executar testes de cobertura
         run: |
+          coverage run -m unittest discover tests
           coverage report
           coverage xml
 
