@@ -1,0 +1,45 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  AWS_REGION:
+  ROLE_TO_ASSUME:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - name: Install Serverless Framework
+      run: npm install -g serverless@3
+    - name: Install dependencies
+      run: npm install
+    - name: Install Poetry
+      run: curl -sSL https://install.python-poetry.org | python3 -
+    - name: Add Poetry to PATH
+      run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
+    - name: Login AWS
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ env.ROLE_TO_ASSUME }}
+        role-session-name: byx-calculation-engine
+        aws-region: us-east-1
+    - name: Deploy to AWS
+      run: serverless deploy --stage prod
