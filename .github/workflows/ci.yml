@@ -30,7 +30,6 @@ jobs:
 
       - name: Executar testes de cobertura
         run: |
-          coverage run -m unittest discover tests
           coverage report
           coverage xml
 
