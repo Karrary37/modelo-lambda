@@ -1,9 +1,9 @@
 ## Baseline: AWS Lambda com Serverless Framework
 
-Este projeto consiste em uma função AWS Lambda simples que retorna uma mensagem "Hello, World!". Utilizamos o framework
-Serverless para facilitar o deploy da aplicação. Para controle de dependências, usamos o Poetry. O projeto também inclui
+Este projeto consiste em uma função AWS [Lambda](https://docs.aws.amazon.com/pt_br/lambda/) simples que retorna uma mensagem "Hello, World!". Utilizamos o framework
+[Serverless](https://www.serverless.com/framework/docs) para facilitar o deploy da aplicação. Para controle de dependências, usamos o [Poetry](https://python-poetry.org/). O projeto também inclui
 um pipeline de CI/CD configurado com GitHub Actions para garantir a qualidade do código através de hooks do pre-commit,
-testes unitários e relatórios de cobertura enviados para o SonarCloud.
+testes unitários e relatórios de cobertura enviados para o [SonarCloud](https://docs.sonarsource.com/sonarcloud/).
 
 ## Estrutura do Projeto
 
@@ -25,7 +25,7 @@ testes unitários e relatórios de cobertura enviados para o SonarCloud.
 
 ## Dependências
 
-Este projeto utiliza o Poetry para gerenciamento de dependências. As dependências são definidas no arquivo
+Este projeto utiliza o [Poetry](https://python-poetry.org/) para gerenciamento de dependências. As dependências são definidas no arquivo
 pyproject.toml.
 
 ## Instalação de Dependências
@@ -38,7 +38,7 @@ poetry install
 
 ## Deploy
 
-O framework Serverless é utilizado para gerenciar o deploy da função AWS Lambda. A configuração do Serverless está no
+O framework [Serverless](https://www.serverless.com/framework/docs) é utilizado para gerenciar o deploy da função AWS [Lambda](https://docs.aws.amazon.com/pt_br/lambda/). A configuração do Serverless está no
 arquivo serverless.yml.
 
 ### Comandos para Deploy
@@ -56,7 +56,7 @@ Utilizamos GitHub Actions para configurar o pipeline de CI/CD. O pipeline inclui
 
 - pre-commit hooks: Para garantir a qualidade do código.
 - Testes unitários: Para verificar o funcionamento correto da aplicação.
-- Cobertura de testes: Para garantir que todo o código está sendo testado, com relatórios enviados para o SonarCloud.
+- Cobertura de testes: Para garantir que todo o código está sendo testado, com relatórios enviados para o [SonarCloud](https://docs.sonarsource.com/sonarcloud/).
 
 ## CI
 
@@ -107,7 +107,7 @@ seu repositório GitHub:
 - GIT_TOKEN
 ```
 
-O Sonar está definido no aquivo sonar-project.properties. Para configurá-lo, adicione os seguintes dados:
+O [Sonar](https://docs.sonarsource.com/sonarcloud/) está definido no aquivo sonar-project.properties. Para configurá-lo, adicione os seguintes dados:
 
 ```
 sonar.organization=OGANIZAÇÂO
